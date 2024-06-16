@@ -1,0 +1,9 @@
+git add .
+git commit -m "hello"
+git push
+
+обновить
+git pull
+
+git rm file1.txt
+git commit -m "remove file1.txt"
