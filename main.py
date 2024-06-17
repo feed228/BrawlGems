@@ -7,39 +7,40 @@ def main(page: ft.Page):
     page.vertical_alignment = ft.MainAxisAlignment.CENTER
     
     img = ft.Image(
-        src=f"D:\Yandex\BrawlGems\images\heroes\default\shelly\shelly_default.png",
-        width=200,
-        height=200,
+        src=f".\images\heroes\default\shelly\shelly_default.png",
+        width=400,
+        height=400,
         fit=ft.ImageFit.CONTAIN,
-        animate_scale= ft.animation.Animation(duration=300,curve=ft.AnimationCurve.EASE)
+        scale=ft.transform.Scale(1),
+        rotate=ft.transform.Rotate(0, alignment=ft.alignment.center),
+        animate_scale=ft.animation.Animation(300, ft.AnimationCurve.EASE),
+        animate_rotation=ft.animation.Animation(300, ft.AnimationCurve.EASE),
     )
    
-    txt_number = ft.TextField(
-        value="0", text_align=ft.TextAlign.RIGHT, width=100)
+    txt_number = ft.Text(
+        value="0", text_align=ft.TextAlign.CENTER, width=800)
 
     def plus_click(e):
         txt_number.value = str(int(txt_number.value) + 1)
-        img.sacle = 0.95
+        img.scale = 0.95
+        img.rotate.angle = 0.20
         page.update()
-        time.sleep(12)
-        img.sacle = 1
+        time.sleep(0.2)
+        img.rotate.angle = 0
+        img.scale = 1
         page.update()
-
+  
     page.add(
-        ft.Row(
-            [
-               ft.IconButton(content = img, on_click=plus_click,)
-            ],
+        ft.Column(
+            spacing=50,
+            controls = [
+               ft.Row([ft.IconButton(content = img, on_click=plus_click)],alignment=ft.MainAxisAlignment.CENTER),
+               ft.Row([txt_number],alignment=ft.MainAxisAlignment.CENTER)
+               ],
             alignment=ft.MainAxisAlignment.CENTER,
-        ),
-        ft.Row(spacing=0,controls=
-            [
-                txt_number
-            ],
-            alignment=ft.MainAxisAlignment.CENTER,
-        ),
-      )
+        )
+    )
 
 
 
-ft.app(main)
+ft.app(target=main)
