@@ -7,3 +7,8 @@ git pull
 
 git rm file1.txt
 git commit -m "remove file1.txt"
+
+
+
+run program with venv
+"./.venv/Scripts/python.exe" "./main.py"
