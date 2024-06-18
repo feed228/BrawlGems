@@ -41,11 +41,15 @@ def main(page: ft.Page):
         for i in list_elements:
             page.controls.append(i)
         page.update()
-
+    
+    audio1 = ft.Audio(src="audio\click_audio.mp3", autoplay=False)
+    page.overlay.append(audio1)
     def plus_click(e):
         global money
         money += 1
         txt_number.value = str(money)
+        audio1.update()
+        audio1.play()
         img.scale = 0.95
         img.rotate.angle = 0.20
         page.update()
