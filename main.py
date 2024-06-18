@@ -7,7 +7,9 @@ money = 0
 def main(page: ft.Page):
     page.title = "BrawlGems"
     page.vertical_alignment = ft.MainAxisAlignment.CENTER
-
+    audio1 = ft.Audio(src=f"audio\click_audio.mp3", autoplay=False,on_loaded=lambda _: print("Loaded"))
+   
+   
     img = ft.Image(
         src=f"images\heroes\default\shelly\shelly_default.png",
         width=400,
@@ -42,14 +44,24 @@ def main(page: ft.Page):
             page.controls.append(i)
         page.update()
     
-    audio1 = ft.Audio(src="audio\click_audio.mp3", autoplay=False)
-    page.overlay.append(audio1)
-    def plus_click(e):
+    
+    page.controls.append(audio1) 
+   
+    score_counter = ft.Text(size=30, animate_opacity=ft.Animation(duration=600, curve=ft.AnimationCurve.DECELERATE),
+                            font_family="MarkerFelt", color="#43DE8E")
+    def plus_click(e:ft.ContainerTapEvent):
+
+        score_counter.opacity = 50
+        score_counter.value = "+1"
+        score_counter.right = 0
+        #score_counter.left = e.local_x
+        #score_counter.top = e.local_y
+        print(type(e))
+        score_counter.bottom = 0
+        audio1.play()
         global money
         money += 1
         txt_number.value = str(money)
-        audio1.update()
-        audio1.play()
         img.scale = 0.95
         img.rotate.angle = 0.20
         page.update()
@@ -57,7 +69,7 @@ def main(page: ft.Page):
         img.rotate.angle = 0
         img.scale = 1
         page.update()
-
+   
     def open_shop_window(e):
         page.clean()
         set_window(shop_window_elements)
@@ -67,6 +79,7 @@ def main(page: ft.Page):
         set_window(main_window_elements)
 
     txt_number = ft.Text(value="0", text_align=ft.TextAlign.CENTER, width=200)
+   
     main_window_elements = [ft.Column(
         spacing=0,
         controls=[
@@ -77,8 +90,7 @@ def main(page: ft.Page):
         ft.Column(
             spacing=50,
             controls=[
-                ft.Row([ft.IconButton(content=img, on_click=plus_click)],
-                       alignment=ft.MainAxisAlignment.CENTER),
+                ft.Container(content=img, on_click=plus_click,alignment=ft.alignment.center),
                 ft.Row([img_coin, txt_number],
                        alignment=ft.MainAxisAlignment.CENTER)
             ],
@@ -101,4 +113,4 @@ def main(page: ft.Page):
     set_window(main_window_elements)
 
 
-ft.app(target=main, view=ft.WEB_BROWSER)
+ft.app(target=main)

@@ -1,9 +1,14 @@
 import flet as ft
+<<<<<<< HEAD
+#import pygame
+
+=======
 import pygame
 import time
 from assets.tools.HeroEntity import HeroEntity
+>>>>>>> 40b13f4ea555030247edccb5acb0682350b6c057
 # Инициализация Pygame
-pygame.mixer.init()
+#pygame.mixer.init()
 
 
 def main(page: ft.Page):
@@ -22,7 +27,7 @@ def main(page: ft.Page):
                       "images\heroes\default\shelly\shelly_default.png"
                       )
 
-    audio = pygame.mixer.Sound("assets/audio/click_audio.mp3")
+    #audio = pygame.mixer.Sound("assets/audio/click_audio.mp3")
 
     def on_tap_down(event: ft.ContainerTapEvent):
         global tap_position
@@ -40,7 +45,7 @@ def main(page: ft.Page):
         score_counter.top = tap_position[1]
         score_counter.bottom = 0
 
-        audio.play()
+        #audio.play()
 
         progress_bar.value += (1/100)
 
