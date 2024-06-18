@@ -1,17 +1,21 @@
 import time
 import flet as ft
+import pygame
 
-# class
+# Инициализация Pygame
+pygame.mixer.init()
 
 
 def main(page: ft.Page):
-    page.title = "BrawlGem"
+    page.title = "Sound Play Example"
     page.theme_mode = ft.ThemeMode.DARK
     page.bgcolor = ft.MainAxisAlignment.CENTER
     page.vertical_alignment = ft.MainAxisAlignment.CENTER
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
     page.fonts = {"MarkerFelt": "fonts/MarkerFelt.ttf"}
     page.theme = ft.Theme(font_family="MarkerFelt")
+
+    audio = pygame.mixer.Sound("assets/audio/click_audio.mp3")
 
     def score_up(event: ft.ContainerTapEvent):
         score.data += 1
@@ -25,11 +29,11 @@ def main(page: ft.Page):
         score_counter.top = 1
         score_counter.bottom = 0
 
-        page.overlay.append(audio)
+        audio.play()
 
         progress_bar.value += (1/100)
 
-        if score.data == 100:
+        if score.data % 100 == 0:
             page.snack_bar = ft.SnackBar(
                 content=ft.Text(
                     value="+100",
@@ -43,7 +47,6 @@ def main(page: ft.Page):
             progress_bar.value = 0
 
         page.update()
-
         time.sleep(0.1)
 
         image.scale = 1
@@ -60,9 +63,6 @@ def main(page: ft.Page):
         animate_scale=ft.Animation(duration=600, curve=ft.AnimationCurve.EASE),
         width=600,
         height=600
-    )
-    audio = ft.Audio(
-        src="audio\click_audio.mp3", autoplay=True
     )
 
     progress_bar = ft.ProgressBar(
@@ -84,7 +84,6 @@ def main(page: ft.Page):
             content=progress_bar,
             border_radius=ft.BorderRadius(10, 10, 10, 10)
         )
-
     )
 
 
