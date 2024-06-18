@@ -1,6 +1,8 @@
 import time
 import flet as ft
 
+# class
+
 
 def main(page: ft.Page):
     page.title = "BrawlGem"
@@ -22,6 +24,8 @@ def main(page: ft.Page):
         score_counter.left = 1
         score_counter.top = 1
         score_counter.bottom = 0
+
+        page.overlay.append(audio)
 
         progress_bar.value += (1/100)
 
@@ -57,6 +61,10 @@ def main(page: ft.Page):
         width=600,
         height=600
     )
+    audio = ft.Audio(
+        src="audio\click_audio.mp3", autoplay=True
+    )
+
     progress_bar = ft.ProgressBar(
         value=0,
         width=page.width - 200,
@@ -81,4 +89,5 @@ def main(page: ft.Page):
 
 
 if __name__ == "__main__":
-    ft.app(target=main, view=ft.WEB_BROWSER)
+    ft.app(target=main)
+    # ft.app(target=main, view=ft.WEB_BROWSER)
