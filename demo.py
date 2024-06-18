@@ -12,8 +12,9 @@ def main(page: ft.Page):
     page.bgcolor = ft.MainAxisAlignment.CENTER
     page.vertical_alignment = ft.MainAxisAlignment.CENTER
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
-    page.fonts = {"MarkerFelt": "fonts/MarkerFelt.ttf"}
+    page.fonts = {"MarkerFelt": "front/MarkerFelt.ttf"}
     page.theme = ft.Theme(font_family="MarkerFelt")
+    page.bgcolor = "#E8DAB2"
 
     audio = pygame.mixer.Sound("assets/audio/click_audio.mp3")
 
@@ -22,6 +23,7 @@ def main(page: ft.Page):
         score.value = str(score.data)
         image.scale = 0.95
 
+        # print(event.local_x)
         score_counter.opacity = 50
         score_counter.value = "+1"
         score_counter.right = 0
@@ -53,9 +55,10 @@ def main(page: ft.Page):
         score_counter.opacity = 0
         page.update()
 
-    score = ft.Text(value="0", size=50, data=0)
+    score = ft.Text(value="0", size=50, data=0,
+                    font_family="MarkerFelt", color="#DD6E42")
     score_counter = ft.Text(
-        size=50, animate_opacity=ft.Animation(duration=600, curve=ft.AnimationCurve.BOUNCE_IN)
+        size=50, animate_opacity=ft.Animation(duration=600, curve=ft.AnimationCurve.BOUNCE_IN), font_family="MarkerFelt", color="#43DE8E"
     )
     image = ft.Image(
         src="images\heroes\default\shelly\shelly_default.png",
