@@ -1,7 +1,7 @@
-import time
 import flet as ft
 import pygame
-
+import time
+from assets.tools.HeroEntity import HeroEntity
 # Инициализация Pygame
 pygame.mixer.init()
 
@@ -15,6 +15,12 @@ def main(page: ft.Page):
     page.fonts = {"MarkerFelt": "front/MarkerFelt.ttf"}
     page.theme = ft.Theme(font_family="MarkerFelt")
     page.bgcolor = "#E8DAB2"
+    hero = HeroEntity("images\heroes\default\shelly\shelly_default.png",
+                      "images\heroes\default\shelly\shelly_default.png",
+                      "images\heroes\default\shelly\shelly_default.png",
+                      "images\heroes\default\shelly\shelly_default.png",
+                      "images\heroes\default\shelly\shelly_default.png"
+                      )
 
     audio = pygame.mixer.Sound("assets/audio/click_audio.mp3")
 
@@ -81,7 +87,7 @@ def main(page: ft.Page):
     page.add(
         score,
         ft.Container(content=ft.Stack(controls=[
-                     image, score_counter]), on_click=score_up, on_tap_down=on_tap_down, margin=ft.Margin(0, 0, 0, 30),),
+                     hero.image_default, score_counter]), on_click=score_up, on_tap_down=on_tap_down, margin=ft.Margin(0, 0, 0, 30),),
         ft.Container(content=progress_bar, border_radius=ft.BorderRadius(10, 10, 10, 10)
                      )
     )

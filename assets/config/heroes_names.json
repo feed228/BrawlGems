@@ -1,0 +1,8 @@
+{
+  "default": ["shelly"],
+  "rare": ["rosa"],
+  "super_rare": ["rico"],
+  "epic": ["piper"],
+  "mythical": ["tara"],
+  "legendary": ["leon", "spike"]
+}
