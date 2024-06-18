@@ -1,9 +1,9 @@
 import time
 import flet as ft
-import pygame
+#import pygame
 
 # Инициализация Pygame
-pygame.mixer.init()
+#pygame.mixer.init()
 
 
 def main(page: ft.Page):
@@ -16,7 +16,7 @@ def main(page: ft.Page):
     page.theme = ft.Theme(font_family="MarkerFelt")
     page.bgcolor = "#E8DAB2"
 
-    audio = pygame.mixer.Sound("assets/audio/click_audio.mp3")
+    #audio = pygame.mixer.Sound("assets/audio/click_audio.mp3")
 
     def on_tap_down(event: ft.ContainerTapEvent):
         global tap_position
@@ -34,7 +34,7 @@ def main(page: ft.Page):
         score_counter.top = tap_position[1]
         score_counter.bottom = 0
 
-        audio.play()
+        #audio.play()
 
         progress_bar.value += (1/100)
 
