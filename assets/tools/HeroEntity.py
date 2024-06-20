@@ -19,17 +19,23 @@ with open('assets/config/defaults_hero_entity.json') as json_file:
 class HeroEntity(object):
     image_ava: ft.Image
     image_hero: ft.Image
+    taps: list[int]
+    costs: list[int]
+
     num_upgrade: int
-    name_hero: str
+    name: str
     type_hero: str
 
-    def init(self, name_hero: str, type_hero: str) -> None:
-        self.name_hero = name_hero
+    def __init__(self, type_hero: str, hero_stats: dict) -> None:
         self.type_hero = type_hero
+        self.name = hero_stats.get("name")
+        self.costs = hero_stats.get("costs")
+        self.taps = hero_stats.get("taps")
+
         self.num_upgrade = 0
 
         self.image_ava = ft.Image(
-            src=f"images\heroes\{type_hero}\{name_hero}\{name_hero}_ava.png",
+            src=f"images\heroes\{type_hero}\{self.name}\{self.name}_ava.png",
             fit=ft.ImageFit.CONTAIN,
             animate_scale=ft.Animation(
                 duration=600, curve=ft.AnimationCurve.EASE),
@@ -37,7 +43,7 @@ class HeroEntity(object):
             height=HEIGHT_AVA
         )
         self.image_default = ft.Image(
-            src=f"images\heroes\{type_hero}\{name_hero}\{name_hero}_default.png",
+            src=f"images\heroes\{type_hero}\{self.name}\{self.name}_default.png",
             fit=ft.ImageFit.CONTAIN,
             animate_scale=ft.Animation(
                 duration=600, curve=ft.AnimationCurve.EASE),
@@ -49,7 +55,7 @@ class HeroEntity(object):
         if (self.num_upgrade < MAX_LEVEL):
             self.num_upgrade += 1
             self.image_default = ft.Image(
-                src=f"images\heroes\{self.type_hero}\{self.name_hero}\{self.name_hero}_upgrade_{self.num_upgrade}.png",
+                src=f"images\heroes\{self.type_hero}\{self.name}\{self.name}_upgrade_{self.num_upgrade}.png",
                 fit=ft.ImageFit.CONTAIN,
                 animate_scale=ft.Animation(
                     duration=600, curve=ft.AnimationCurve.EASE),
@@ -60,10 +66,28 @@ class HeroEntity(object):
     def set_image_hero(self, name: str, num_upgrade: int, type: str):
         self.num_upgrade = num_upgrade
         self.image_default = ft.Image(
-            src=f"images\heroes\{self.type_hero}\{self.name_hero}\{self.name_hero}_upgrade_{self.num_upgrade}.png",
+            src=f"images\heroes\{self.type_hero}\{self.name}\{self.name}_upgrade_{self.num_upgrade}.png",
             fit=ft.ImageFit.CONTAIN,
             animate_scale=ft.Animation(
                 duration=600, curve=ft.AnimationCurve.EASE),
             width=WIDTH_HERO,
             height=HEIGHT_HERO
         )
+
+    def get_ava_hero(self):
+        pass
+
+    def get_image_hero(self):
+        pass
+
+    def get_tap_hero(self):
+        pass
+
+    def get_update_tap_hero(self):
+        pass
+
+    def get_cost_hero(self):
+        pass
+
+    def get_update_cost_hero(self):
+        pass

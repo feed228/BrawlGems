@@ -5,9 +5,9 @@ with open('assets/config/heroes_types.json') as json_file:
     global HEROES_TYPES
     HEROES_TYPES = json.load(json_file)
 
-with open('assets/config/heroes_names.json') as json_file:
-    global HEROES_NAMES
-    HEROES_NAMES = json.load(json_file)
+with open('assets/config/heroes_stats.json') as json_file:
+    global HEROES_STATS
+    HEROES_STATS = json.load(json_file)
 
 
 class BrawlHeroes(object):
@@ -15,17 +15,16 @@ class BrawlHeroes(object):
 
     def __init__(self) -> None:
         self.dict_heroes = HEROES_TYPES
-        self.dict_heroes_name = HEROES_NAMES
+        self.dict_heroes_stats = HEROES_STATS
 
-    def add_hero(self, name_hero: str, type_hero: str):
-        self.dict_heroes[type_hero] = HeroEntity(
-            name_hero=name_hero, type_hero=type_hero)
+    def add_hero(self, type_hero: str, hero_stats: dict):
+        self.dict_heroes[type_hero].append(HeroEntity(
+            type_hero=type_hero, hero_stats=hero_stats))
 
     def crate_dict_heroes(self):
-        for type_hero in self.dict_heroes_name.keys():
-            for name_hero in self.dict_heroes_name[type_hero]:
-                print(name_hero)
-                self.add_hero(name_hero=name_hero, type_hero=type_hero)
+        for type_hero in self.dict_heroes_stats.keys():
+            for hero_stats in self.dict_heroes_stats[type_hero]:
+                self.add_hero(type_hero=type_hero, hero_stats=hero_stats)
 
     def get_main_hero(self):
         pass
