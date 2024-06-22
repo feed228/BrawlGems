@@ -42,7 +42,7 @@ class HeroEntity(object):
             width=WIDTH_AVA,
             height=HEIGHT_AVA
         )
-        self.image_default = ft.Image(
+        self.image_hero = ft.Image(
             src=f"images\heroes\{type_hero}\{self.name}\{self.name}_default.png",
             fit=ft.ImageFit.CONTAIN,
             animate_scale=ft.Animation(
@@ -54,7 +54,7 @@ class HeroEntity(object):
     def upgrade_hero(self):
         if (self.num_upgrade < MAX_LEVEL):
             self.num_upgrade += 1
-            self.image_default = ft.Image(
+            self.image_hero = ft.Image(
                 src=f"images\heroes\{self.type_hero}\{self.name}\{self.name}_upgrade_{self.num_upgrade}.png",
                 fit=ft.ImageFit.CONTAIN,
                 animate_scale=ft.Animation(
@@ -65,7 +65,7 @@ class HeroEntity(object):
 
     def set_image_hero(self, name: str, num_upgrade: int, type: str):
         self.num_upgrade = num_upgrade
-        self.image_default = ft.Image(
+        self.image_hero = ft.Image(
             src=f"images\heroes\{self.type_hero}\{self.name}\{self.name}_upgrade_{self.num_upgrade}.png",
             fit=ft.ImageFit.CONTAIN,
             animate_scale=ft.Animation(
@@ -75,19 +75,25 @@ class HeroEntity(object):
         )
 
     def get_ava_hero(self):
-        pass
+        return self.image_ava
 
     def get_image_hero(self):
-        pass
+        return self.image_hero
 
     def get_tap_hero(self):
-        pass
+        return self.taps[self.num_upgrade]
 
-    def get_update_tap_hero(self):
-        pass
+    def get_upgrade_tap_hero(self):
+        if (self.num_upgrade < MAX_LEVEL):
+            return self.taps[self.num_upgrade+1]
+        else:
+            return None
 
     def get_cost_hero(self):
-        pass
+        return self.costs[self.num_upgrade]
 
-    def get_update_cost_hero(self):
-        pass
+    def get_upgrade_cost_hero(self):
+        if (self.num_upgrade < MAX_LEVEL):
+            return self.costs[self.num_upgrade+1]
+        else:
+            return None
