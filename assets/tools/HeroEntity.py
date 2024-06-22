@@ -54,6 +54,7 @@ class HeroEntity(object):
     def upgrade_hero(self):
         if (self.num_upgrade < MAX_LEVEL):
             self.num_upgrade += 1
+            print(123)
             self.image_hero = ft.Image(
                 src=f"images\heroes\{self.type_hero}\{self.name}\{self.name}_upgrade_{self.num_upgrade}.png",
                 fit=ft.ImageFit.CONTAIN,
@@ -94,6 +95,6 @@ class HeroEntity(object):
 
     def get_upgrade_cost_hero(self):
         if (self.num_upgrade < MAX_LEVEL):
-            return self.costs[self.num_upgrade+1]
+            return self.costs[self.num_upgrade + 1]
         else:
             return None

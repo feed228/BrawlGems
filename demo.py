@@ -1,10 +1,17 @@
-import flet as ft
 
-import pygame
-import time
+
 from assets.tools.HeroEntity import HeroEntity
+import time
+import pygame
+import flet as ft
+hero_shelly = {"name": "shelly",
+               "taps": [1, 2, 3, 4],
+               "costs": [0, 5000, 10000, 20000],
+               "max_click": [1000, 1500, 2000, 3000]}
+
+
 # Инициализация Pygame
-# pygame.mixer.init()
+pygame.mixer.init()
 
 
 def main(page: ft.Page):
@@ -16,14 +23,13 @@ def main(page: ft.Page):
     page.fonts = {"MarkerFelt": "front/MarkerFelt.ttf"}
     page.theme = ft.Theme(font_family="MarkerFelt")
     page.bgcolor = "#E8DAB2"
-    hero = HeroEntity("images\heroes\default\shelly\shelly_default.png",
-                      "images\heroes\default\shelly\shelly_default.png",
-                      "images\heroes\default\shelly\shelly_default.png",
-                      "images\heroes\default\shelly\shelly_default.png",
-                      "images\heroes\default\shelly\shelly_default.png"
-                      )
+    hero = HeroEntity(type_hero="default", hero_stats=hero_shelly)
 
-    # audio = pygame.mixer.Sound("assets/audio/click_audio.mp3")
+    audio = pygame.mixer.Sound("assets/audio/click_audio.mp3")
+
+    def upgrade_hero(event):
+        price = "asdasd"
+        page.update()
 
     def on_tap_down(event: ft.ContainerTapEvent):
         global tap_position
@@ -32,7 +38,7 @@ def main(page: ft.Page):
     def score_up(event: ft.ContainerTapEvent):
         score.data += 1
         score.value = str(score.data)
-        image.scale = 0.95
+        hero.image_hero.scale = 0.95
 
         score_counter.opacity = 50
         score_counter.value = "+1"
@@ -41,7 +47,7 @@ def main(page: ft.Page):
         score_counter.top = tap_position[1]
         score_counter.bottom = 0
 
-        # audio.play()
+        audio.play()
 
         progress_bar.value += (1/100)
 
@@ -61,7 +67,7 @@ def main(page: ft.Page):
         page.update()
         time.sleep(0.1)
 
-        image.scale = 1
+        hero.image_hero.scale = 1
         score_counter.opacity = 0
         page.update()
 
@@ -76,6 +82,7 @@ def main(page: ft.Page):
         width=600,
         height=600
     )
+    price = f"Улучшить героя за 113123"
 
     progress_bar = ft.ProgressBar(
         value=0,
@@ -88,13 +95,14 @@ def main(page: ft.Page):
     page.add(
         score,
         ft.Container(content=ft.Stack(controls=[
-                     hero.image_default, score_counter]), on_click=score_up, on_tap_down=on_tap_down, margin=ft.Margin(0, 0, 0, 30),),
+                     hero.image_hero, score_counter]), on_click=score_up, on_tap_down=on_tap_down, margin=ft.Margin(0, 0, 0, 30),),
         ft.Container(content=progress_bar, border_radius=ft.BorderRadius(10, 10, 10, 10)
-                     )
+                     ),
+        ft.Container(ft.TextButton(
+            text=f"Улучшить героя за {price}", scale=2, on_click=upgrade_hero))
     )
 
 
 if __name__ == "__main__":
-    pass
-    # ft.app(target=main)
+    ft.app(target=main)
     # ft.app(target=main, view=ft.WEB_BROWSER)

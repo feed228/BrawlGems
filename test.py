@@ -2,7 +2,7 @@ from assets.package.BrawlHeroes import BrawlHeroes
 from assets.tools.HeroEntity import HeroEntity
 
 
-hero = HeroEntity("default", {"name": "Golovach", "costs": [
+hero = HeroEntity("default", {"name": "shelly", "costs": [
                   10000, 15000, 20000, 25000], "taps": [2, 4, 5, 6]})
 
 print("name ", hero.name)
